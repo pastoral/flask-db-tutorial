@@ -1,4 +1,12 @@
 ##### App factory — creates the Flask app ####
+'''
+    The App Factory pattern creates your Flask app inside a function 
+    rather than at module level. This makes the app easier to test and configure. 
+    Notice that db = SQLAlchemy() is created without an app — it gets bound to the app 
+    later via db.init_app(app). This is the recommended pattern for larger projects.
+'''
+
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from config import DevelopmentConfig
@@ -15,8 +23,8 @@ def create_app():
     db.init_app(app)
     
     # Import and register routes
-    from app.routes import tasks_bp
-    app.register_blueprint(tasks_bp)
+    from app.routes import main
+    app.register_blueprint(main) #    # Register blueprints (our route groups)#
     
     """
     🗺️ What is a Blueprint?
